@@ -1,0 +1,23 @@
+<%= form_tag repositories_index_path, method: :get, value: "sdfs" do || %>
+    <%= text_field_tag(:search, '',{value: params[:search]})%>
+    <%= submit_tag 'search' %>
+<% end %>
+<hr>
+
+<div>
+	<p style="color: red"><b><%= @message %></b> </p>
+</div>
+
+<% if @paginated_data.present? %>
+	<h4>Total Results: <%= @total_entries %></h4>
+	<% @paginated_data.each do |repo| %>
+		<div>
+			<h3><%= link_to repo[:full_name], repo[:html_url], target: '_blank' %></h3>
+			<p><%= truncate(repo[:description], :length => 2000) %></p>
+		</div>
+		<hr>
+	<% end %>
+	<%= will_paginate @collection_size_objects %>
+<% else %>
+	<b>No repositories available, try searching something..</b>
+<% end %>

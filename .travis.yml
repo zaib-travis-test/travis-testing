@@ -1,0 +1,11 @@
+language: ruby
+rvm: '2.5.5'
+cache: bundler
+dist: bionic
+env:
+  global:
+    - PATH=/snap/bin:$PATH
+addons:
+  postgresql: 9.6
+before_install:
+  - 'gem install bundler -v 2.1.4'
